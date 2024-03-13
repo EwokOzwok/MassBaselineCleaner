@@ -11,7 +11,7 @@ app_ui <- function(request) {
     # Your application UI logic
 
     shinyMobile::f7Page(
-      title = "Substance Use Screener",
+      title = "Mass Baseline Cleaner",
       options = list(theme=c("auto"), dark=TRUE, preloader = F,  pullToRefresh=F),
       allowPWA=TRUE,
 
