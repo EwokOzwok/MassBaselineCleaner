@@ -69,5 +69,7 @@ usethis::use_package("haven")
 usethis::use_package("htmltools")
 usethis::use_package("dplyr")
 usethis::use_package("readxl")
+usethis::use_package("shinyjs")
+
 # go to dev/02_dev.R
 rstudioapi::navigateToFile("dev/02_dev.R")
