@@ -13,6 +13,7 @@ Imports:
     golem (>= 0.4.1),
     haven,
     htmltools,
+    pkgload,
     shiny (>= 1.8.0),
     shinyjs,
     shinyMobile,
