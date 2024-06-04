@@ -31,7 +31,7 @@ app_server <- function(input, output, session) {
     data<-as.data.frame(data)
 
 
-    dich_cols<-c(7:32,35,39:60,62:76,95:371,372:451,477:496,502:533,535:568)
+    dich_cols<-c(7:32,35,39:60,62:76,95:371,372:451,477:501,514:533,535:568)
 
     for(i in dich_cols){
       for(j in 1:nrow(data)){
