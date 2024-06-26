@@ -22,16 +22,18 @@ app_server <- function(input, output, session) {
 
   })
 
+  # df<-read_sav("MassSurvey_Baseline+Spring+2024_June+25,+2024_20.55.sav")
+
 
   clean_data<-function(inputdata){
     data<-inputdata
     data<-as.matrix(as.data.frame(data))
-    data<-data[,-c(1:4,6:7,9:18,598:600)]
-    colnames(data)<-CleanCols[,1]
+    data<-data[,-c(1:4,6:7,8:18,598)]
+    # colnames(data)<-CleanCols[,1]
     data<-as.data.frame(data)
 
 
-    dich_cols<-c(7:32,35,39:60,62:76,95:371,372:451,477:501,514:533,535:568)
+    dich_cols<-c(5:13, 15:31, 33, 39:47 ,61:69, 404:449)
 
     for(i in dich_cols){
       for(j in 1:nrow(data)){
@@ -40,7 +42,6 @@ app_server <- function(input, output, session) {
     }
     return(data)
   }
-
 
 
   observeEvent(input$cleanbutton,{
