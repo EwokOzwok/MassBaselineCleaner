@@ -5,7 +5,7 @@ account: ualbanyprojectaccess
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 11476293
-bundleId: 8701274
+bundleId: 8788650
 url: https://ualbanyprojectaccess.shinyapps.io/MassBaselineCleaner/
 version: 1
 asMultiple: FALSE
