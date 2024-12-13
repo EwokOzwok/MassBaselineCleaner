@@ -22,18 +22,19 @@ app_server <- function(input, output, session) {
 
   })
 
-  # df<-read_sav("MassSurvey_Baseline+Spring+2024_June+25,+2024_20.55.sav")
-
+  # data<-read_sav("Fall24-Baseline.sav")
 
   clean_data<-function(inputdata){
     data<-inputdata
     data<-as.matrix(as.data.frame(data))
-    data<-data[,-c(1:4,6:7,8:18,598)]
     # colnames(data)<-CleanCols[,1]
     data<-as.data.frame(data)
+    colnames(data)<-Fall24CleanCols$Fall24ColNames
+    data<-data[,-c(1:4,6,7,9:12,14:18,400:404)]
 
-
-    dich_cols<-c(5:13, 15:31, 33, 39:47 ,61:69, 404:449)
+    dich_cols<-c(8:15,17:32,38:45,70:78,206:252)
+    nineties_or_negs_cols<-c(8,48,83:90,176,194,267:270)
+    # dich_cols<-c(5:13, 15:31, 33, 39:47 ,61:69, 404:449)
 
     for(i in dich_cols){
       for(j in 1:nrow(data)){
@@ -41,7 +42,19 @@ app_server <- function(input, output, session) {
       }
     }
     return(data)
-  }
+
+
+    for(i in nineties_or_negs_cols){
+      for(j in 1:nrow(data)){
+        data[j,i]<-ifelse(data[j,i]>90 | data[j,i]<0,NA,data[j,i])
+      }
+    }
+    return(data)
+
+    data$GraduateStudent<-ifelse(data$UA_CollegeYear>5,1,0)
+
+
+    }
 
 
   observeEvent(input$cleanbutton,{
