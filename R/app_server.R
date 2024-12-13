@@ -22,7 +22,7 @@ app_server <- function(input, output, session) {
 
   })
 
-  # data<-read_sav("Fall24-Baseline.sav")
+  # data<-read_sav("Fall+24+-+Baseline_December+13,+2024_18.27.sav")
 
   clean_data<-function(inputdata){
     data<-inputdata
@@ -32,28 +32,36 @@ app_server <- function(input, output, session) {
     colnames(data)<-Fall24CleanCols$Fall24ColNames
     data<-data[,-c(1:4,6,7,9:12,14:18,400:404)]
 
-    dich_cols<-c(8:15,17:32,38:45,70:78,206:252)
-    nineties_or_negs_cols<-c(8,48,83:90,176,194,267:270)
-    # dich_cols<-c(5:13, 15:31, 33, 39:47 ,61:69, 404:449)
+    Fall24_dich_cols<-c(8:15,17:32,38:45,70:78,206:252)
+    Fall24_nineties_or_negs_cols<-c(8,48,83:90,176,194,267:270)
+    # Spring24_dich_cols<-c(5:13, 15:31, 33, 39:47 ,61:69, 404:449)
 
-    for(i in dich_cols){
+    for(i in Fall24_dich_cols){
       for(j in 1:nrow(data)){
         data[j,i]<-ifelse(is.na(data[j,i])==T,0,data[j,i])
       }
     }
 
 
-    for(i in nineties_or_negs_cols){
+    for(i in Fall24_nineties_or_negs_cols){
       for(j in 1:nrow(data)){
         data[j,i]<-ifelse(data[j,i]>90 | data[j,i]<0,NA,data[j,i])
       }
     }
 
+    numeric_cols<-c(1,3:6,8:15,17:32,34,35,37:45,47:389)
+
+    for(i in numeric_cols){
+      data[,i]<-as.numeric(data[,i])
+    }
+
+
+    data$RecordedDate<-as.Date(data$RecordedDate)
+
     data$GraduateStudent<-ifelse(data$UA_CollegeYear>4,1,0)
 
     return(data)
   }
-
 
 
   observeEvent(input$cleanbutton,{
