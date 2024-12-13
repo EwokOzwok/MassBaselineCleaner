@@ -41,7 +41,6 @@ app_server <- function(input, output, session) {
         data[j,i]<-ifelse(is.na(data[j,i])==T,0,data[j,i])
       }
     }
-    return(data)
 
 
     for(i in nineties_or_negs_cols){
@@ -49,12 +48,12 @@ app_server <- function(input, output, session) {
         data[j,i]<-ifelse(data[j,i]>90 | data[j,i]<0,NA,data[j,i])
       }
     }
+
+    data$GraduateStudent<-ifelse(data$UA_CollegeYear>4,1,0)
+
     return(data)
+  }
 
-    data$GraduateStudent<-ifelse(data$UA_CollegeYear>5,1,0)
-
-
-    }
 
 
   observeEvent(input$cleanbutton,{
