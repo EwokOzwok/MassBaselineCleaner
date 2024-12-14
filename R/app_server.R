@@ -36,6 +36,19 @@ app_server <- function(input, output, session) {
     Fall24_nineties_or_negs_cols<-c(8,48,83:90,176,194,267:270)
     # Spring24_dich_cols<-c(5:13, 15:31, 33, 39:47 ,61:69, 404:449)
 
+    numeric_cols<-c(1,3:6,8:15,17:32,34,35,37:45,47:389)
+    for(i in numeric_cols){
+      data[,i]<-as.numeric(data[,i])
+    }
+
+
+    for(i in Fall24_nineties_or_negs_cols){
+      for(j in 1:nrow(data)){
+        data[j,i]<-ifelse(data[j,i]>90,NA,data[j,i])
+        data[j,i]<-ifelse(data[j,i]<0,NA,data[j,i])
+      }
+    }
+
     for(i in Fall24_dich_cols){
       for(j in 1:nrow(data)){
         data[j,i]<-ifelse(is.na(data[j,i])==T,0,data[j,i])
@@ -48,13 +61,6 @@ app_server <- function(input, output, session) {
         data[j,i]<-ifelse(data[j,i]>90 | data[j,i]<0,NA,data[j,i])
       }
     }
-
-    numeric_cols<-c(1,3:6,8:15,17:32,34,35,37:45,47:389)
-
-    for(i in numeric_cols){
-      data[,i]<-as.numeric(data[,i])
-    }
-
 
     data$RecordedDate<-as.Date(data$RecordedDate)
 
