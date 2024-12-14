@@ -64,7 +64,7 @@ app_server <- function(input, output, session) {
 
     data$RecordedDate<-as.Date(data$RecordedDate)
 
-    data$GraduateStudent<-ifelse(data$UA_CollegeYear>4,1,0)
+    data$GraduateStudent<-ifelse(data$UA_CollegeYear==5,1,0)
 
     return(data)
   }
